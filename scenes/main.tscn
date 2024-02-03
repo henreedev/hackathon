@@ -1,16 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6ccbqlao12un"]
+[gd_scene load_steps=5 format=3 uid="uid://b6ccbqlao12un"]
 
 [ext_resource type="PackedScene" uid="uid://c1nhldq5wc608" path="res://scenes/characters/player.tscn" id="1_85sax"]
 [ext_resource type="PackedScene" uid="uid://iiexavaf3lba" path="res://scenes/environment/planet.tscn" id="2_o6jw5"]
 [ext_resource type="PackedScene" uid="uid://b7v0gepg1lqob" path="res://scenes/environment/asteroid.tscn" id="3_bonlj"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sgeh2"]
+
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_85sax")]
-position = Vector2(263, 73)
+position = Vector2(334, 73)
 
 [node name="Planet" parent="." instance=ExtResource("2_o6jw5")]
 position = Vector2(656, 322)
 
 [node name="Asteroid" parent="." instance=ExtResource("3_bonlj")]
 position = Vector2(955, 44)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(414, 688)
+shape = SubResource("WorldBoundaryShape2D_sgeh2")

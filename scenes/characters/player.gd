@@ -36,10 +36,20 @@ func add_planet(planet : Planet):
 func remove_planet(planet : Planet):
 	_planets.erase(planet)
 
+func _integrate_forces(state):
+	if _target_planet:
+		var rotate_speed = 0.01
+		print(rad_to_deg(get_angle_to(_target_planet.position)))
+		state.rotation = lerp_angle(rotation, get_angle_to(_target_planet.position), rotate_speed)
+	else: 
+		var rotate_speed = 0.01
+		state.rotation = lerp_angle(rotation, 0, rotate_speed)
+
 func _physics_process(delta):
 	_calc_gravity_vector()
 	if _target_planet:
-		var rotate_speed = 1.0
+		var rotate_speed = 5.0
+		print(rad_to_deg(get_angle_to(_target_planet.position)))
 		rotation = lerp_angle(rotation, get_angle_to(_target_planet.position), delta * rotate_speed)
 	else: 
 		var rotate_speed = 1.0
