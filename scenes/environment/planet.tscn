@@ -266,7 +266,7 @@ shape = SubResource("CircleShape2D_b1gm5")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ec5ov")
 animation = &"orbit"
-frame_progress = 0.0203435
+frame_progress = 0.537335
 
 [node name="Area2D" type="Area2D" parent="."]
 gravity_space_override = 3
@@ -280,3 +280,4 @@ gravity = 3000.0
 shape = SubResource("CircleShape2D_1mtvt")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
