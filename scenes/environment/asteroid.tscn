@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7v0gepg1lqob"]
+
+[ext_resource type="Texture2D" uid="uid://cqg0xyp2dllsk" path="res://assets/image/moon/1.png" id="1_4k41y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpj6v"]
+radius = 25.0799
+
+[node name="Asteroid" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(689, -7)
+shape = SubResource("CircleShape2D_xpj6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(689, -7)
+texture = ExtResource("1_4k41y")

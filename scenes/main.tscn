@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6ccbqlao12un"]
+
+[ext_resource type="PackedScene" uid="uid://c1nhldq5wc608" path="res://scenes/characters/player.tscn" id="1_85sax"]
+[ext_resource type="PackedScene" uid="uid://iiexavaf3lba" path="res://scenes/environment/planet.tscn" id="2_o6jw5"]
+[ext_resource type="Texture2D" uid="uid://cqg0xyp2dllsk" path="res://assets/image/moon/1.png" id="3_ohla0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o3wr3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t2ixs"]
+radius = 25.0799
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_85sax")]
+position = Vector2(263, 73)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(280, 469)
+shape = SubResource("WorldBoundaryShape2D_o3wr3")
+
+[node name="Planet" parent="." instance=ExtResource("2_o6jw5")]
+position = Vector2(656, 322)
+
+[node name="Asteroid" type="RigidBody2D" parent="."]
+mass = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroid"]
+position = Vector2(689, -7)
+shape = SubResource("CircleShape2D_t2ixs")
+
+[node name="Sprite2D" type="Sprite2D" parent="Asteroid"]
+position = Vector2(689, -7)
+texture = ExtResource("3_ohla0")
