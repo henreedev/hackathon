@@ -7,7 +7,7 @@ var _type : Type
 var gravity := 0.0
 var gravity_point_unit_distance := 0.0;
 var heat := 0.0
-var heat_rate := 1.0
+var heat_rate := 0.85
 var heat_rate_mod := 1.0
 
 # Called when the node enters the scene tree for the first time.
@@ -19,8 +19,9 @@ func _ready():
 		scale = Vector2(_scale, _scale)
 		$Area2D.gravity_point_unit_distance *= _scale
 	if _type == Type.BLACK_HOLE:
-		$Area2D.gravity *= 2
-		$Area2D.gravity_point_unit_distance *= 1.3
+		$Area2D.gravity *= 1.8
+		$Area2D.gravity_point_unit_distance *= 1.25
+		physics_material_override = physics_material_override.duplicate()
 		physics_material_override.friction = 0.0
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6ccbqlao12un"]
+[gd_scene load_steps=13 format=3 uid="uid://b6ccbqlao12un"]
 
 [ext_resource type="PackedScene" uid="uid://c1nhldq5wc608" path="res://scenes/characters/player.tscn" id="1_85sax"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_w3n4b"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bp8gsqtjtuvws" path="res://assets/image/bg/pixel-space-bg.png" id="4_j2hgw"]
 [ext_resource type="FontFile" uid="uid://b506tkha8k5qf" path="res://assets/fonts/m5x7 (1).ttf" id="6_naojw"]
 [ext_resource type="Script" path="res://scenes/Label.gd" id="7_ox16n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1qtbm"]
+font = ExtResource("6_naojw")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x2ldb"]
 distance = -4001.0
@@ -19,10 +22,14 @@ font_size = 48
 outline_color = Color(0.415686, 1, 1, 1)
 shadow_size = 2
 
-[node name="Main" type="Node2D"]
+[sub_resource type="Environment" id="Environment_ipepx"]
+tonemap_mode = 3
+tonemap_exposure = 10.65
+
+[node name="Main" type="Node2D" groups=["main"]]
 script = ExtResource("1_w3n4b")
 spawn_pos = Vector2(2000, 3750)
-planet = ExtResource("2_o6jw5")
+planet_scene = ExtResource("2_o6jw5")
 resource = ExtResource("3_8b5iq")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -39,6 +46,17 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 
+[node name="Label" type="Label" parent="."]
+offset_left = 1970.0
+offset_top = 3721.0
+offset_right = 2034.0
+offset_bottom = 3734.0
+text = "press space"
+label_settings = SubResource("LabelSettings_1qtbm")
+visible_characters = 0
+visible_ratio = 0.0
+metadata/_edit_group_ = true
+
 [node name="Player" parent="." instance=ExtResource("1_85sax")]
 position = Vector2(2047, 3395)
 metadata/_edit_group_ = true
@@ -53,6 +71,7 @@ rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_njm23")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldContainer"]
+position = Vector2(7, 6)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_njm23")
 
@@ -77,7 +96,15 @@ label_settings = SubResource("LabelSettings_ppins")
 horizontal_alignment = 1
 script = ExtResource("7_ox16n")
 
-[node name="ColorRect" type="ColorRect" parent="HUD"]
-offset_right = 4830.0
-offset_bottom = 4554.0
-color = Color(0, 0, 0, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ipepx")
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 1933.0
+offset_top = 3698.0
+offset_right = 2076.0
+offset_bottom = 3746.0
+text = "save the world"
+label_settings = SubResource("LabelSettings_1qtbm")
+horizontal_alignment = 1

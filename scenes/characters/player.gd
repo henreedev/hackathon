@@ -5,7 +5,7 @@ const SPEED = 135.0
 const JUMP_VELOCITY = -300.0
 
 var _speed_mod = 1.0
-var _potion_weight = 1.15
+var _potion_weight = 1.12
 
 var grounded = false
 var game_over = false
@@ -56,7 +56,7 @@ func _process(delta):
 
 func _adjust_heat_rate_mod(delta):
 	if in_black_hole:
-		_earth.heat_rate_mod = lerp(1.0, 5.0, black_hole_strength)
+		_earth.heat_rate_mod = lerp(1.0, 4.0, black_hole_strength)
 	else:
 		_earth.heat_rate_mod = 1.0
 
@@ -104,6 +104,8 @@ func _check_game_over():
 	if _earth.heat == 100.0 or _earth.heat == 0.0 and _earth.heat_rate <= 0.0:
 		game_over = true
 		loss = _earth.heat == 100.0
+		if _trail_guide:
+			_trail_guide.queue_free()
 		# commence ending sequence
 		# stop camera
 		var camera : Camera2D = $Camera2D
@@ -161,7 +163,7 @@ func deposit_resources():
 		$ResourceDeposit.pitch_scale = randf_range(0.9, 1.2)
 		$ResourceDeposit.play()
 		get_tree().call_group("potion_icon", "set_invisible")
-		_earth.heat -= 15 * _num_resources
+		_earth.heat -= 20 * _num_resources
 		_earth.heat_rate -= 0.16 * _num_resources
 		_num_resources = 0
 		_speed_mod = 1.0
