@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6ccbqlao12un"]
+
+[ext_resource type="PackedScene" uid="uid://c1nhldq5wc608" path="res://scenes/characters/player.tscn" id="1_85sax"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_w3n4b"]
+[ext_resource type="PackedScene" uid="uid://iiexavaf3lba" path="res://scenes/environment/planet.tscn" id="2_o6jw5"]
+[ext_resource type="Texture2D" uid="uid://bp8gsqtjtuvws" path="res://assets/image/bg/pixel-space-bg.png" id="4_j2hgw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sgeh2"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_w3n4b")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.15, 0.15)
+motion_mirroring = Vector2(640, 640)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+self_modulate = Color(0.576471, 0.576471, 0.576471, 1)
+texture_repeat = 2
+texture = ExtResource("4_j2hgw")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 2000)
+
+[node name="Planet" parent="." instance=ExtResource("2_o6jw5")]
+position = Vector2(715, 291)
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(414, 688)
+shape = SubResource("WorldBoundaryShape2D_sgeh2")
+
+[node name="Planet4" parent="." instance=ExtResource("2_o6jw5")]
+position = Vector2(444, 429)
+metadata/_edit_group_ = true
+
+[node name="Planet5" parent="." instance=ExtResource("2_o6jw5")]
+position = Vector2(579, 368)
+metadata/_edit_group_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_85sax")]
+position = Vector2(503, 283)
+metadata/_edit_group_ = true

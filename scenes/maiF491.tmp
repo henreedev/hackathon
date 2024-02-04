@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://b6ccbqlao12un"]
+
+[ext_resource type="PackedScene" uid="uid://c1nhldq5wc608" path="res://scenes/characters/player.tscn" id="1_85sax"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_w3n4b"]
+[ext_resource type="PackedScene" uid="uid://iiexavaf3lba" path="res://scenes/environment/planet.tscn" id="2_o6jw5"]
+[ext_resource type="PackedScene" uid="uid://ca3vj48e7ot0s" path="res://scenes/environment/potion.tscn" id="3_8b5iq"]
+[ext_resource type="Texture2D" uid="uid://bp8gsqtjtuvws" path="res://assets/image/bg/pixel-space-bg.png" id="4_j2hgw"]
+[ext_resource type="FontFile" uid="uid://b506tkha8k5qf" path="res://assets/fonts/m5x7 (1).ttf" id="6_naojw"]
+[ext_resource type="Script" path="res://scenes/Label.gd" id="7_ox16n"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x2ldb"]
+distance = -4001.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_njm23"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppins"]
+line_spacing = 0.0
+font_size = 36
+shadow_size = 2
+shadow_color = Color(1, 0.392157, 0, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_w3n4b")
+planet = ExtResource("2_o6jw5")
+resource = ExtResource("3_8b5iq")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.15, 0.15)
+motion_mirroring = Vector2(640, 640)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+self_modulate = Color(0.576471, 0.576471, 0.576471, 1)
+texture_repeat = 2
+texture = ExtResource("4_j2hgw")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="Player" parent="." instance=ExtResource("1_85sax")]
+position = Vector2(2047, 3395)
+metadata/_edit_group_ = true
+
+[node name="WorldContainer" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldContainer"]
+shape = SubResource("WorldBoundaryShape2D_x2ldb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldContainer"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_njm23")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldContainer"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_njm23")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldContainer"]
+position = Vector2(4000, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_njm23")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.5
+offset_right = 70.5
+offset_bottom = 29.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_naojw")
+text = "100°F (69°C)"
+label_settings = SubResource("LabelSettings_ppins")
+horizontal_alignment = 1
+script = ExtResource("7_ox16n")

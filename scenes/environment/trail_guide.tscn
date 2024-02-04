@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://blcckg6v7jkrk"]
+
+[sub_resource type="Gradient" id="Gradient_oq3re"]
+offsets = PackedFloat32Array(0, 0.786885, 1)
+colors = PackedColorArray(0, 1, 0.411765, 1, 1, 1, 0.388235, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ou2c7"]
+gradient = SubResource("Gradient_oq3re")
+
+[sub_resource type="Curve" id="Curve_5f58f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.824176, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pjgbm"]
+curve = SubResource("Curve_5f58f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xvgtp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 4, 1)
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -92.18
+radial_accel_max = 100.0
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+damping_min = 150.0
+damping_max = 250.0
+scale_curve = SubResource("CurveTexture_pjgbm")
+scale_over_velocity_min = 0.3
+scale_over_velocity_max = 1.5
+color_ramp = SubResource("GradientTexture1D_ou2c7")
+
+[node name="TrailGuide" type="GPUParticles2D"]
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_xvgtp")
+visibility_rect = Rect2(-2000, -2000, 4000, 4000)

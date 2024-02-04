@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca3vj48e7ot0s"]
+
+[ext_resource type="Texture2D" uid="uid://b4s6klmcmhd3m" path="res://assets/image/resources/greenportion.png" id="1_tf1fg"]
+[ext_resource type="Script" path="res://resource.gd" id="2_qowko"]
+
+[node name="Potion" type="RigidBody2D" groups=["potions"]]
+center_of_mass_mode = 1
+center_of_mass = Vector2(0, 10)
+max_contacts_reported = 2
+contact_monitor = true
+script = ExtResource("2_qowko")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.04, 0.04)
+polygon = PackedVector2Array(0, -300, 200, 75, 150, 275, -150, 275, -200, 75)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("1_tf1fg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

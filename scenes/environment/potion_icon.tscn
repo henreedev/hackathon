@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://kff33jbunig5"]
+
+[ext_resource type="Texture2D" uid="uid://b4s6klmcmhd3m" path="res://assets/image/resources/greenportion.png" id="1_lj0f4"]
+[ext_resource type="Script" path="res://scenes/environment/potion_icon.gd" id="2_qbyhr"]
+
+[node name="PotionIcon" type="Sprite2D" groups=["potion_icon"]]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("1_lj0f4")
+script = ExtResource("2_qbyhr")
